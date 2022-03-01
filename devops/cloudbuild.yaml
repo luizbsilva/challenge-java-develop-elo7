@@ -1,0 +1,33 @@
+steps:
+  #####################################################################
+  # Application Build
+  #####################################################################
+  - id: 'Build'
+    name: 'gcr.io/$PROJECT_ID/gradle-jdk-11:latest'
+    args: [
+        './gradlew',
+        'build',
+        '-x',
+        'test'
+
+    ]
+
+  ##################################################################
+  # Build Docker
+  ##################################################################
+  - id: 'Docker Build'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [
+        'build',
+        '--tag=gcr.io/$PROJECT_ID/${_APP_NAME}:${BUILD_ID}',
+        '--tag=gcr.io/$PROJECT_ID/${_APP_NAME}:latest',
+        '.',
+        '-f',
+        'devops/Dockerfile'
+    ]
+
+  - id: 'Docker Push'
+    name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/$PROJECT_ID/${_APP_NAME}' ]
+timeout: 900s
+images: [ 'gcr.io/$PROJECT_ID/${_APP_NAME}' ]
