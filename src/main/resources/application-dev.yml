@@ -1,0 +1,20 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    driver: org.postgresql.postgresql
+    url: jdbc:postgresql://localhost:5432/challenge-develop?stringtype=unspecified
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        use_sql_comments: false
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
