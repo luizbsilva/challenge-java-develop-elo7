@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  jmx:
+    enabled: false
+  sleuth:
+    enabled: false
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+    serialization-inclusion: NON_NULL
+    deserialization:
+      fail_on_unknown_properties: false
+      read_date_timestamps_as_nanoseconds: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+health:
+  config:
+    enabled: false
+
+hystrix:
+  shareSecurityContext: true
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+      isolation:
+        thread:
+          timeoutInMilliseconds: 60000
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    br.com.unicred: DEBUG
